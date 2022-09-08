@@ -10,7 +10,7 @@ export default class Home extends React.Component {
                 alignItems: "center",
             }}>
                 <Text>
-                    Home Screen
+                    Home Screenn.
                 </Text>
             </View>
         );
