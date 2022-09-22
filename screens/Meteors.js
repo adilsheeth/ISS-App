@@ -8,7 +8,7 @@ export default class Meteors extends React.Component {
     super(props);
     this.state = {
       meteors: {},
-
+      
     }
   }
 
@@ -29,25 +29,38 @@ export default class Meteors extends React.Component {
       })
       .catch((error) => {
         Alert.alert("Error", error.message);
-      });
-    
+      })
   }
 
   render() {
-    return (
-      <View style={styles.container} >
-        <Text> Meteors Screen</Text>
-      </View>
-    );
+    if (Object.keys(this.state.meteors).length == 0) {
+      return (
+        <View style={styles.container}>
+          <Text>Loading...</Text>
+        </View>
+      );
+    } else {
+      let meteorArr = Object.keys(this.state.meteors).map((meteor_date) => {
+        return this.state.meteors[meteor_date];
+      });
+      let meteors = [].concat.apply([], meteorArr);
+      meteors.forEach(function (element) {
+        let diameter = (element.estimated_diameter.kilometers.estimated_diameter_min + element.estimated_diameter.kilometers.estimated_diameter_max) / 2;
+        let threatScore = (diameter / element.close_approach_data[0].miss_distance.kilometers) * 1000000000;
+      });
+      return (
+        <Text>Calculating Treat Score...</Text>
+      );
+    }
   }
 }
 
 const styles = {
   container: {
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  }
 }
 
 //API Key = krQdOEYR874N5EZyDlVOFC2n7jVKVsUsaXCkZAHU
