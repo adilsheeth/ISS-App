@@ -55,9 +55,9 @@ export default class Meteors extends React.Component {
     }
     return(
       <View>
-        <ImageBackground source={{bg_img}} style={styles.backgroundImg}>
+        <ImageBackground source={bg_img} style={styles.backgroundImg}>
           <View style={styles.gifContainer}>
-            <Image source={{speed}} style={{
+            <Image source={speed} style={{
               width: size,
               height: size,
               alignSelf: "center",
@@ -114,14 +114,12 @@ export default class Meteors extends React.Component {
       meteors = meteors.slice(0,5);
       return (
         <View style={styles.container}>
-          <SafeAreaView style={styles.droidSafeArea}>
             <FlatList 
               data={meteors} 
               renderItem={this.renderItem}
               keyExtractor={this.keyExtractor}
               horizontal={true}
             />
-          </SafeAreaView>
         </View>
       );
     }
